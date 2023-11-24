@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="styles.css">
+	<title>Prototypes Example - Chaining</title>
+</head>
+
+<body>
+	<h1>
+		Examples
+	</h1>
+	<div id="chaining-example">
+		<h2>Chaining Example</h2>
+
+		<p>Here, we start with a base class called Polygon:</p>
+
+		<code>
+      function Polygon(sides) {
+        this.sides = sides;
+      }
+    </code>
+
+		<p>Now, we create two additional classes, Triangle and Fiveside, based on the Polygon:</p>
+
+		<code>
+      function Triangle() {
+        <br>
+        Polygon.call(this, 3); // sets the value for this.sides
+        <br>
+        this.polygonName = 'Triangle'; // adds a new default property
+        <br>
+      }
+    </code>
+
+		<code>
+      function Fiveside() {
+        <br>
+        Polygon.call(this, 5);
+        <br>
+        this.polygonName = 'Fiveside';
+        <br>
+      }
+    </code>
+
+		<p>Next, we set up a prototype chain relationship with Polygon as the base:</p>
+
+		<code>
+      Triangle.prototype = Object.create(Polygon.prototype);
+      <br>
+      Fiveside.prototype = Object.create(Polygon.prototype);
+    </code>
+
+		<p>This is known as <strong>"prototypal chaining"</strong>, where Triangle and Fiveside are chained to the Polygon
+			class and inherit its properties and methods.
+			<br>
+			As an example, we set up a new method on the base class:
+		</p>
+
+		<code>
+      Polygon.prototype.describe = function () {
+        <br>
+        return `I am a ${this.polygonName} with ${this.getNumberOfSides()} sides.`;
+        <br>
+      };
+    </code>
+
+		<p>Finally, we create instances from the derived classes:</p>
+
+		<code>
+      const pentagon = new Polygon(5); // an instance of the Polygon with specified sides
+      <br>
+      const triangle = new Triangle(); // an instance of the Triangle class
+      <br>
+      const newPentagon = new Fiveside(); // an instance of the Fiveside class
+    </code>
+
+		<p>The instances demonstrate how methods can be called from both the base and derived classes.</p>
+
+		<p>Output:</p>
+		<p id="chaining-output"></p>
+		<p id="chaining-output2"></p>
+		<p id="chaining-output3"></p>
+	</div>
+
+	<p>Since polygon does not have a polygon name, it will show undefined.</p>
+	<p>Lastly lets create a new instance of a triangle and shadow the describe method.</p>
+
+	<code>
+		const equilateral  = new Triangle();
+		<br>
+		equilateral.describe = function () {
+			<br>
+			return `I am a ${this.polygonName} equal sides.`;
+			<br>
+		};
+	</code>
+
+	<p id="chaining-output4"></p>
+
+	<script src="index.js"></script>
+</body>
+
+</html>
