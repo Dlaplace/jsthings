@@ -1,106 +1,258 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Prototypes Example - Chaining</title>
+  </head>
+  <body>
+		<h1>Matrix basic knowledge examples</h1>
+		<h2>Prototype Example</h2>
+		<button type="button" onclick="showcontent('prototypes')">
+			show example
+		</button>
+		<div id="prototypes" style="display: none;">
+			<div id="chaining-example">
+				<p>Here, we start with a base class called Polygon:</p>
 
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="styles.css">
-	<title>Prototypes Example - Chaining</title>
-</head>
+				<pre><code>
+	function Polygon(sides) {
+		this.sides = sides;
+	}
+				</code></pre>
 
-<body>
-	<h1>
-		Examples
-	</h1>
-	<div id="chaining-example">
-		<h2>Chaining Example</h2>
+				<p>Now, we create two additional classes, Triangle and Fiveside, based on the Polygon:</p>
 
-		<p>Here, we start with a base class called Polygon:</p>
+				<pre><code>
+	function Triangle() {
+		Polygon.call(this, 3); // sets the value for this.sides
+		this.polygonName = 'Triangle'; // adds a new default property
+	}
 
-		<code>
-      function Polygon(sides) {
-        this.sides = sides;
-      }
-    </code>
+	function Fiveside() {
+		Polygon.call(this, 5);
+		this.polygonName = 'Fiveside';
+	}
+				</code></pre>
 
-		<p>Now, we create two additional classes, Triangle and Fiveside, based on the Polygon:</p>
+				<p>Next, we set up a prototype chain relationship with Polygon as the base:</p>
 
-		<code>
-      function Triangle() {
-        <br>
-        Polygon.call(this, 3); // sets the value for this.sides
-        <br>
-        this.polygonName = 'Triangle'; // adds a new default property
-        <br>
-      }
-    </code>
+				<pre><code>
+	Triangle.prototype = Object.create(Polygon.prototype);
+	Fiveside.prototype = Object.create(Polygon.prototype);
+				</code></pre>
 
-		<code>
-      function Fiveside() {
-        <br>
-        Polygon.call(this, 5);
-        <br>
-        this.polygonName = 'Fiveside';
-        <br>
-      }
-    </code>
+				<p>This is known as <strong>"prototypal chaining"</strong>, where Triangle and Fiveside are chained to the Polygon class and inherit its properties and methods.<br>
+				As an example, we set up a new method on the base class:</p>
 
-		<p>Next, we set up a prototype chain relationship with Polygon as the base:</p>
+				<pre><code>
+	Polygon.prototype.describe = function () {
+		return `I am a ${this.polygonName} with ${this.getNumberOfSides()} sides.`;
+	};
+				</code></pre>
 
-		<code>
-      Triangle.prototype = Object.create(Polygon.prototype);
-      <br>
-      Fiveside.prototype = Object.create(Polygon.prototype);
-    </code>
+				<p>Finally, we create instances from the derived classes:</p>
 
-		<p>This is known as <strong>"prototypal chaining"</strong>, where Triangle and Fiveside are chained to the Polygon
-			class and inherit its properties and methods.
-			<br>
-			As an example, we set up a new method on the base class:
-		</p>
+				<pre><code>
+	const pentagon = new Polygon(5); // an instance of the Polygon with specified sides
+	const triangle = new Triangle(); // an instance of the Triangle class
+	const newPentagon = new Fiveside(); // an instance of the Fiveside class
+				</code></pre>
 
-		<code>
-      Polygon.prototype.describe = function () {
-        <br>
-        return `I am a ${this.polygonName} with ${this.getNumberOfSides()} sides.`;
-        <br>
-      };
-    </code>
+				<p>The instances demonstrate how methods can be called from both the base and derived classes.</p>
 
-		<p>Finally, we create instances from the derived classes:</p>
+				<p>Output:</p>
+				<pre><code id="chaining-output"></code></pre>
+				<pre><code id="chaining-output2"></code></pre>
+				<pre><code id="chaining-output3"></code></pre>
+				<p>Since polygon does not have a polygon name, it will show undefined.</p>
+				<p>Lastly lets create a new instance of a triangle and shadow the describe method.</p>
 
-		<code>
-      const pentagon = new Polygon(5); // an instance of the Polygon with specified sides
-      <br>
-      const triangle = new Triangle(); // an instance of the Triangle class
-      <br>
-      const newPentagon = new Fiveside(); // an instance of the Fiveside class
-    </code>
-
-		<p>The instances demonstrate how methods can be called from both the base and derived classes.</p>
-
-		<p>Output:</p>
-		<p id="chaining-output"></p>
-		<p id="chaining-output2"></p>
-		<p id="chaining-output3"></p>
-	</div>
-
-	<p>Since polygon does not have a polygon name, it will show undefined.</p>
-	<p>Lastly lets create a new instance of a triangle and shadow the describe method.</p>
-
-	<code>
-		const equilateral  = new Triangle();
-		<br>
-		equilateral.describe = function () {
-			<br>
+				<pre><code>
+		const equilateral = new Triangle();
+	equilateral.describe = function () {
 			return `I am a ${this.polygonName} equal sides.`;
-			<br>
 		};
-	</code>
+				</code></pre>
 
-	<p id="chaining-output4"></p>
+				<pre><code id="chaining-output4"></code></pre>
 
-	<script src="index.js"></script>
-</body>
+			</div>
+		</div>
+		<h2>Currying</h2>
+		<button type="button" onclick="showcontent('currying')">show example</button>
+		<div id="currying">
+			<p>
+				Currying is a technique where a function is called with one or more arguments
+				and returns a function that can be called with one argument.
+				Once all the arguments are have been suplied the final result is returned.
+				<br>
+				Here is a simple example of currying:
+			</p>
 
+			<p>
+				We start with a simple function that adds three numbers together:
+			</p>
+			<pre><code>
+				function sum(a, b, c) {
+					return a + b + c;
+				}
+				console.log(result); // 6
+			</code></pre>
+
+			<p>
+				Now we can use currying to create a function that adds two numbers together:
+			</p>
+			<pre><code>
+				function sum(a) {
+					return function(b) {
+						return function (c) {
+							return a + b + c;
+						}
+					}
+				}
+				const result = sum(1)(2)(3);
+				console.log(result); // 6
+			</code></pre>
+			<p>
+				We can even call the function without having all the arguments, still
+				it wont return a value until all the arguments have been supplied.
+				<br>
+				Even though is called currying, i preffer the naming as "matryoshka" because
+				it is very similar to matryoshka doll, it insrts a function within another.
+				<br>
+				Here is an example using fetchy with currying applied:
+			</p>
+			<pre><code>
+				function fetch(url) {
+					return function(method) {
+						return function(body) {
+							return function(headers) {
+								return function(callback) {
+									// do something with url, method, body, headers, and callback
+								}
+							}
+						}
+					}
+				}
+
+				fetch("https://example.com")(method)("body")(headers)(callback)
+			</code></pre>
+			<p>
+				now, this doesnt look pretty Since it is a function within a function
+				within a function, but it is very similar to matryoshka doll.
+				<br>
+				We may think, that we'd preffer using tpical function with several arguments,
+				but that is not the case if we have more function we want to use with a similar
+				structure. Then we'd have to create more functions.
+				<br>
+				This is where currying comes in. Since it opens the way to function composition.
+				This is a functional programming concept, which is an alternative to
+				object oriented programming and prototype inheritance solutions.
+			</p>
+
+			<p>
+				another way to set up currying is directly calling another function, encapsulating each
+				portion in a function. This way we can set up multiple option on a single function.
+				<br>
+				Lets see an example:
+			</p>
+
+			<pre><code>
+				function fetch(url) {
+					return function(method) {
+						return function(body) {
+							return function(headers) {
+								return function(callback) {
+									// do something with url, method, body, headers, and callback
+								}
+							}
+						}
+					}
+				}
+				// now lets use currying
+				const fetcher = fetch("https://example.com");
+
+				const get = fetcher("GET")("body")(headers)(callback);
+				const post = fetcher("POST")("body")(headers)(callback);
+				const put = fetcher("PUT")("body")(headers)(callback);
+			</code></pre>
+			<p>
+				this way we can use the same functions to call multiple options.
+				<br>
+				while using several arguments in function does a similar thing.
+				currying may be a bit easier to read. lets do an example using different mathematical operations:
+			</p>
+			<pre><code>
+				const add = (a, b) => a + b;
+				const subtract = (a, b) => a - b;
+				function calculator(operation) {
+					return function(a) {
+						return function(b) {
+							return operation(a, b);
+						}
+					}
+				}
+				const adder = calculator(add);
+				const subtractor = calculator(subtract);
+
+				const result = adder(1)(2);
+				console.log(result); // 3
+
+				const result2 = subtractor(1)(2);
+				console.log(result2); // -1
+				.. etc.
+
+				or even direactly using currying:
+				const sum = calculator(add)(1)(2); //3
+				const differece = calculator(subtract)(1)(2); // -1
+			</pre></code>
+			<p>
+				At the point when you are going to use curyying, it looks like using legos.
+				This can be helpful on fetching and midlewares.
+				<br>
+				there is another way of writing currying in which the function are directl called and added.
+				<br>
+				lets see an example:
+			</p>
+
+			<pre><code>
+				const createApiClient = (baseUrl) => (endpoint) => (options) =>
+				fetch(`${baseUrl}/${endpoint}`, options);
+
+				const apiUrl = 'https://api.example.com';
+
+				const apiClient = createApiClient(apiUrl);
+
+				const getUserEndpoint = 'users';
+				const getPostEndpoint = 'posts';
+
+				const requestOptions = {
+					method: 'GET',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+				};
+
+				const getUser = apiClient(getUserEndpoint);
+				getUser(requestOptions)
+					.then((response) => response.json())
+					.then((data) => console.log(data))
+					.catch((error) => console.error(error));
+
+				const getPost = apiClient(getPostEndpoint);
+				getPost(requestOptions)
+					.then((response) => response.json())
+					.then((data) => console.log(data))
+					.catch((error) => console.error(error));
+
+			</code></pre>
+			<p>
+				I preffer not using this way since it is not easy to read or directly comprehend.
+			</p>
+		</div>
+
+    <script src="index.js"></script>
+  </body>
 </html>

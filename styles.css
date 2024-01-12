@@ -1,0 +1,76 @@
+/* styles.css */
+
+/* Add general styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #1a1a1a;
+  color: #f0f0f0;
+  padding: 10px;
+}
+
+h1 {
+  color: #fff;
+}
+
+h2 {
+  color: #ccc;
+}
+
+p {
+  color: #999;
+  line-height: 1.5;
+}
+
+code {
+  background-color: #666;
+  padding: 4px;
+  display: block;
+  color: #f0f0f0;
+}
+
+/* Add specific styles for the chaining example */
+#chaining-example {
+  background-color: #333;
+  padding: 20px;
+  border: 1px solid #666;
+}
+
+#chaining-output {
+  font-weight: bold;
+  color: #ff0000;
+}
+
+#chaining-output2,
+#chaining-output3,
+#chaining-output4 {
+  color: #ff0000;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  body {
+    padding: 5px;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  p {
+    font-size: 16px;
+  }
+
+  code {
+    font-size: 12px;
+  }
+
+  #chaining-example {
+    padding: 10px;
+  }
+}

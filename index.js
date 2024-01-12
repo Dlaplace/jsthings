@@ -39,3 +39,13 @@ document.getElementById('chaining-output').innerText += `1. ${pentagon.describe(
 document.getElementById('chaining-output2').innerText += `2. ${triangle.describe()}`;
 document.getElementById('chaining-output3').innerText += `3. ${newPentagon.describe()}`;
 document.getElementById('chaining-output4').innerText += `4. ${equilateral.describe()}`;
+
+
+function showcontent(id) {
+  const contentToShow = document.getElementById(id);
+  if (contentToShow.style.display === "none") {
+    contentToShow.style.display = "block";
+  } else {
+    contentToShow.style.display = "none";
+  }
+}
