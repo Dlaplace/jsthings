@@ -1,30 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>Prototypes Example - Chaining</title>
-  </head>
-  <body>
-		<h1>Matrix basic knowledge examples</h1>
-		<h2>Prototype Example</h2>
-		<button type="button" onclick="showcontent('prototypes')">
-			show example
-		</button>
-		<div id="prototypes" style="display: none;">
-			<div id="chaining-example">
-				<p>Here, we start with a base class called Polygon:</p>
 
-				<pre><code>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="styles.css">
+	<title>Prototypes Example - Chaining</title>
+</head>
+
+<body>
+	<h1>Matrix basic knowledge examples</h1>
+	<h2>Prototype Example</h2>
+	<button type="button" onclick="showcontent('prototypes')">
+		show example
+	</button>
+	<div id="prototypes" style="display: none;">
+		<div id="chaining-example">
+			<p>Here, we start with a base class called Polygon:</p>
+
+			<pre><code>
 	function Polygon(sides) {
 		this.sides = sides;
 	}
 				</code></pre>
 
-				<p>Now, we create two additional classes, Triangle and Fiveside, based on the Polygon:</p>
+			<p>Now, we create two additional classes, Triangle and Fiveside, based on the Polygon:</p>
 
-				<pre><code>
+			<pre><code>
 	function Triangle() {
 		Polygon.call(this, 3); // sets the value for this.sides
 		this.polygonName = 'Triangle'; // adds a new default property
@@ -36,75 +38,76 @@
 	}
 				</code></pre>
 
-				<p>Next, we set up a prototype chain relationship with Polygon as the base:</p>
+			<p>Next, we set up a prototype chain relationship with Polygon as the base:</p>
 
-				<pre><code>
+			<pre><code>
 	Triangle.prototype = Object.create(Polygon.prototype);
 	Fiveside.prototype = Object.create(Polygon.prototype);
 				</code></pre>
 
-				<p>This is known as <strong>"prototypal chaining"</strong>, where Triangle and Fiveside are chained to the Polygon class and inherit its properties and methods.<br>
+			<p>This is known as <strong>"prototypal chaining"</strong>, where Triangle and Fiveside are chained to the
+				Polygon class and inherit its properties and methods.<br>
 				As an example, we set up a new method on the base class:</p>
 
-				<pre><code>
+			<pre><code>
 	Polygon.prototype.describe = function () {
 		return `I am a ${this.polygonName} with ${this.getNumberOfSides()} sides.`;
 	};
 				</code></pre>
 
-				<p>Finally, we create instances from the derived classes:</p>
+			<p>Finally, we create instances from the derived classes:</p>
 
-				<pre><code>
+			<pre><code>
 	const pentagon = new Polygon(5); // an instance of the Polygon with specified sides
 	const triangle = new Triangle(); // an instance of the Triangle class
 	const newPentagon = new Fiveside(); // an instance of the Fiveside class
 				</code></pre>
 
-				<p>The instances demonstrate how methods can be called from both the base and derived classes.</p>
+			<p>The instances demonstrate how methods can be called from both the base and derived classes.</p>
 
-				<p>Output:</p>
-				<pre><code id="chaining-output"></code></pre>
-				<pre><code id="chaining-output2"></code></pre>
-				<pre><code id="chaining-output3"></code></pre>
-				<p>Since polygon does not have a polygon name, it will show undefined.</p>
-				<p>Lastly lets create a new instance of a triangle and shadow the describe method.</p>
+			<p>Output:</p>
+			<pre><code id="chaining-output"></code></pre>
+			<pre><code id="chaining-output2"></code></pre>
+			<pre><code id="chaining-output3"></code></pre>
+			<p>Since polygon does not have a polygon name, it will show undefined.</p>
+			<p>Lastly lets create a new instance of a triangle and shadow the describe method.</p>
 
-				<pre><code>
+			<pre><code>
 		const equilateral = new Triangle();
 	equilateral.describe = function () {
 			return `I am a ${this.polygonName} equal sides.`;
 		};
 				</code></pre>
 
-				<pre><code id="chaining-output4"></code></pre>
+			<pre><code id="chaining-output4"></code></pre>
 
-			</div>
 		</div>
-		<h2>Currying</h2>
-		<button type="button" onclick="showcontent('currying')">show example</button>
-		<div id="currying">
-			<p>
-				Currying is a technique where a function is called with one or more arguments
-				and returns a function that can be called with one argument.
-				Once all the arguments are have been suplied the final result is returned.
-				<br>
-				Here is a simple example of currying:
-			</p>
+	</div>
+	<h2>Currying</h2>
+	<button type="button" onclick="showcontent('currying')">show example</button>
+	<div id="currying">
+		<p>
+			Currying is a technique where a function is called with one or more arguments
+			and returns a function that can be called with one argument.
+			Once all the arguments are have been suplied the final result is returned.
+			<br>
+			Here is a simple example of currying:
+		</p>
 
-			<p>
-				We start with a simple function that adds three numbers together:
-			</p>
-			<pre><code>
+		<p>
+			We start with a simple function that adds three numbers together:
+		</p>
+		<pre><code>
 				function sum(a, b, c) {
 					return a + b + c;
 				}
 				console.log(result); // 6
 			</code></pre>
 
-			<p>
-				Now we can use currying to create a function that adds two numbers together:
-			</p>
-			<pre><code>
+		<p>
+			Now we can use currying to create a function that adds two numbers together:
+		</p>
+		<pre><code>
 				function sum(a) {
 					return function(b) {
 						return function (c) {
@@ -115,16 +118,16 @@
 				const result = sum(1)(2)(3);
 				console.log(result); // 6
 			</code></pre>
-			<p>
-				We can even call the function without having all the arguments, still
-				it wont return a value until all the arguments have been supplied.
-				<br>
-				Even though is called currying, i preffer the naming as "matryoshka" because
-				it is very similar to matryoshka doll, it insrts a function within another.
-				<br>
-				Here is an example using fetchy with currying applied:
-			</p>
-			<pre><code>
+		<p>
+			We can even call the function without having all the arguments, still
+			it wont return a value until all the arguments have been supplied.
+			<br>
+			Even though is called currying, i preffer the naming as "matryoshka" because
+			it is very similar to matryoshka doll, it insrts a function within another.
+			<br>
+			Here is an example using fetchy with currying applied:
+		</p>
+		<pre><code>
 				function fetch(url) {
 					return function(method) {
 						return function(body) {
@@ -139,27 +142,27 @@
 
 				fetch("https://example.com")(method)("body")(headers)(callback)
 			</code></pre>
-			<p>
-				now, this doesnt look pretty Since it is a function within a function
-				within a function, but it is very similar to matryoshka doll.
-				<br>
-				We may think, that we'd preffer using tpical function with several arguments,
-				but that is not the case if we have more function we want to use with a similar
-				structure. Then we'd have to create more functions.
-				<br>
-				This is where currying comes in. Since it opens the way to function composition.
-				This is a functional programming concept, which is an alternative to
-				object oriented programming and prototype inheritance solutions.
-			</p>
+		<p>
+			now, this doesnt look pretty Since it is a function within a function
+			within a function, but it is very similar to matryoshka doll.
+			<br>
+			We may think, that we'd preffer using tpical function with several arguments,
+			but that is not the case if we have more function we want to use with a similar
+			structure. Then we'd have to create more functions.
+			<br>
+			This is where currying comes in. Since it opens the way to function composition.
+			This is a functional programming concept, which is an alternative to
+			object oriented programming and prototype inheritance solutions.
+		</p>
 
-			<p>
-				another way to set up currying is directly calling another function, encapsulating each
-				portion in a function. This way we can set up multiple option on a single function.
-				<br>
-				Lets see an example:
-			</p>
+		<p>
+			another way to set up currying is directly calling another function, encapsulating each
+			portion in a function. This way we can set up multiple option on a single function.
+			<br>
+			Lets see an example:
+		</p>
 
-			<pre><code>
+		<pre><code>
 				function fetch(url) {
 					return function(method) {
 						return function(body) {
@@ -178,13 +181,13 @@
 				const post = fetcher("POST")("body")(headers)(callback);
 				const put = fetcher("PUT")("body")(headers)(callback);
 			</code></pre>
-			<p>
-				this way we can use the same functions to call multiple options.
-				<br>
-				while using several arguments in function does a similar thing.
-				currying may be a bit easier to read. lets do an example using different mathematical operations:
-			</p>
-			<pre><code>
+		<p>
+			this way we can use the same functions to call multiple options.
+			<br>
+			while using several arguments in function does a similar thing.
+			currying may be a bit easier to read. lets do an example using different mathematical operations:
+		</p>
+		<pre><code>
 				const add = (a, b) => a + b;
 				const subtract = (a, b) => a - b;
 				function calculator(operation) {
@@ -208,16 +211,16 @@
 				const sum = calculator(add)(1)(2); //3
 				const differece = calculator(subtract)(1)(2); // -1
 			</pre></code>
-			<p>
-				At the point when you are going to use curyying, it looks like using legos.
-				This can be helpful on fetching and midlewares.
-				<br>
-				there is another way of writing currying in which the function are directl called and added.
-				<br>
-				lets see an example:
-			</p>
+		<p>
+			At the point when you are going to use curyying, it looks like using legos.
+			This can be helpful on fetching and midlewares.
+			<br>
+			there is another way of writing currying in which the function are directl called and added.
+			<br>
+			lets see an example:
+		</p>
 
-			<pre><code>
+		<pre><code>
 				const createApiClient = (baseUrl) => (endpoint) => (options) =>
 				fetch(`${baseUrl}/${endpoint}`, options);
 
@@ -248,11 +251,278 @@
 					.catch((error) => console.error(error));
 
 			</code></pre>
-			<p>
-				I preffer not using this way since it is not easy to read or directly comprehend.
-			</p>
-		</div>
+		<p>
+			I preffer not using this way since it is not easy to read or directly comprehend.
+		</p>
+	</div>
+	<h2>Functions</h2>
+	<button type="button" onclick="showcontent('functions')">show example</button>
+	<div id="functions">
+		<h3> IIFE: Immediately invoked funcion expresion</h3>
+		<p>these are function that are Immediately called after it is defined for example:</p>
+		<code>
+				(function(){return 2+2})()
+				// returns 4
+			</code>
+		<p>
+			With this we can create an private scope so it doesnt affect the global scope.
+			But whats an scope?.
+		</p>
+		<h3>
+			Scope
+		</h3>
+		<p>
+			it is a context in which variables and function are declared and can be accesed.
+			In Js is principally categorized as Local scope and Global scope
+		</p>
+		<h4>global scope</h4>
+		<p>here impleies all variables o functions declared out of a scope, ex:</p>
+		<pre>
+			<code>
+					var a = "im a local variable"
+					function globalFunction() {
+						console.log(globalVariable);
+					}
+					
+					globalFunction(); // Outputs: I am global
+	
+				</code>
+		</pre>
+		<h4>
+			Local Scope
+		</h4>
+		<p>they are declared inside a function or block and can only be accesible within this scope</p>
+		<p>
+			Knowing this, if we declare a Immediately invoked function in a variable, this 
+			variable becomes only accessible there. EX:
+		</p>
+		<pre>
+			<code>
+				(function(){
+					var a =5
+					console.log(a)
+				})()
+				// console.log(a) would throw an error
+			</code>
+		</pre>
+		<p>
+			this would be widely use in ES5 to encapsulate variables values. however var is only
+			function- scoped. This means that any block scope wont owrk on it to encapsulate it ex:
+		</p>
+		<pre>
+			<code>
+				if(true){
+					var notEncapsulated = 20
+					console.log(notEncapsulated) // will log 20
+				}
+				console.log(notEncapsulated) // will log 20
+			</code>
+		</pre>
+		<p>
+			from ES6 let and const variables are added and are block-scoped, making easier to 
+			encapsulate these variables within a scope.
+		</p>
+		<pre>
 
-    <script src="index.js"></script>
-  </body>
+			<code>
+				if(true){
+					let encapsulated = 20
+					console.log(encapsulated) // will log 20
+				}
+				console.log(encapsulated) // will log "not defined"
+			</code>
+		</pre>
+		<h1>Data Types, Variable Types, and Variable Management</h1>
+
+		<h2>Data Types</h2>
+	
+		<p>
+			In JavaScript, there are several data types used to represent different kinds of values.
+		</p>
+	
+		<h3>Primitive Data Types</h3>
+	
+		<ul>
+			<li><strong>String:</strong> Represents text. Example: <code>var name = 'John';</code></li>
+			<li><strong>Number:</strong> Represents numeric values. Example: <code>var age = 25;</code></li>
+			<li><strong>Boolean:</strong> Represents true or false values. Example: <code>var isStudent = true;</code></li>
+			<li><strong>Null:</strong> Represents the absence of a value. Example: <code>var value = null;</code></li>
+			<li><strong>Undefined:</strong> Represents an uninitialized variable. Example: <code>var undefinedVar;</code></li>
+		</ul>
+	
+		<h3>Reference Data Types</h3>
+	
+		<ul>
+			<li><strong>Object:</strong> Represents a collection of key-value pairs. Example: <code>var person = { name: 'John', age: 25 };</code></li>
+			<li><strong>Array:</strong> Represents an ordered list of values. Example: <code>var numbers = [1, 2, 3, 4];</code></li>
+		</ul>
+	
+		<h2>Variable Types</h2>
+	
+		<p>
+			Variables in JavaScript are declared using the <code>var</code>, <code>let</code>, or <code>const</code> keywords.
+		</p>
+	
+		<h3>Variable Types</h3>
+	
+		<p>
+			The type of a variable can change dynamically based on the assigned value.
+		</p>
+	
+		<pre>
+			<code>
+				var dynamicVariable = 'Hello';
+				dynamicVariable = 42; // Now dynamicVariable is a number
+			</code>
+		</pre>
+	
+		<h2>Variable Management</h2>
+	
+		<p>
+			Managing variables involves updating and manipulating data as needed.
+		</p>
+	
+		<h3>Variable Manipulation</h3>
+	
+		<pre>
+			<code>
+				let score = 90;
+				score += 10; // Incrementing the score
+			</code>
+		</pre>
+
+		<h2>Closures</h2>
+
+    <p>
+        A closure in is a feature that allows a function to access variables from its outer (parent) scope,
+        even after the outer function has finished executing. This creates a private scope for the function, preserving
+        the state of variables.
+    </p>
+
+    <h2>Example</h2>
+
+    <pre>
+        <code>
+            function outer() {
+                var outerVar = 'I am outer';
+
+                function inner() {
+                    console.log(outerVar);
+                }
+
+                return inner;
+            }
+
+            var closureExample = outer();
+            closureExample(); // Outputs: I am outer
+        </code>
+    </pre>
+
+    <h2>Explanation</h2>
+
+    <p>
+        In this example, the inner function is defined inside the outer function. When
+        outer is called, it returns the inner function. The closureExample variable
+        now holds a reference to the inner function along with the scope in which it was created. When
+        closureExample() is called later, it still has access to the outerVar variable, even
+        though outer has finished executing. This is an example of a closure.
+    </p>
+		<p>Closures then, help us on:</p>
+    <ul>
+        <li>Creating private variables and functions.</li>
+        <li>Implementing data encapsulation and information hiding.</li>
+        <li>Managing state in functional programming patterns.</li>
+    </ul>
+
+		<h1>This, Call, Bind, Apply in JavaScript</h1>
+
+    <h2>`this` in JavaScript</h2>
+
+    <p>
+        In JavaScript, the <b>this</b> keyword refers to the object to which the current code belongs.
+        The value of <b>this</b> depends on how a function is invoked.
+    </p>
+
+    <pre>
+        <code>
+            var person = {
+                name: 'John',
+                sayHello: function() {
+                    console.log('Hello, ' + this.name + '!');
+                }
+            };
+
+            person.sayHello(); // Outputs: Hello, John!
+        </code>
+    </pre>
+
+    <h2>call()</h2>
+
+    <p>
+        The <b>call()</b> method is used to invoke a function with a specified <b>this</b> value and
+        individual arguments provided as separate arguments.
+    </p>
+
+    <pre>
+        <code>
+            var person1 = { name: 'Alice' };
+            var person2 = { name: 'Bob' };
+
+            function greet(message) {
+                console.log(message + ', ' + this.name + '!');
+            }
+
+            greet.call(person1, 'Hi'); // Outputs: Hi, Alice!
+            greet.call(person2, 'Hello'); // Outputs: Hello, Bob!
+        </code>
+    </pre>
+
+    <h2>bind()</h2>
+
+    <p>
+        The <b>bind()</b> method creates a new function that, when called, has its <b>this</b> set to a
+        specific value and prepends any provided parameters to the original function's parameters.
+    </p>
+
+    <pre>
+        <code>
+            var person = { name: 'Charlie' };
+
+            function greet(message) {
+                console.log(message + ', ' + this.name + '!');
+            }
+
+            var greetPerson = greet.bind(person);
+            greetPerson('Hola'); // Outputs: Hola, Charlie!
+        </code>
+    </pre>
+
+    <h2>apply()</h2>
+
+    <p>
+        The <b>apply()</b> method is similar to <b>call()</b>, but it takes an array or an array-like
+        object as its second argument, which is treated as the arguments to be passed to the function.
+    </p>
+
+    <pre>
+        <code>
+            var person = { name: 'David' };
+
+            function greet(message1, message2) {
+                console.log(message1 + ', ' + this.name + '! ' + message2);
+            }
+
+            greet.apply(person, ['Bonjour', 'How are you?']);
+            // Outputs: Bonjour, David! How are you?
+        </code>
+    </pre>
+		<button id="myButton1" onclick="buttonClick(this)">Click me 1</button>
+    <button id="myButton2" onclick="buttonClick(this)">Click me 2</button>
+	
+	</div>
+
+
+	<script src="index.js"></script>
+</body>
+
 </html>

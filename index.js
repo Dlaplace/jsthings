@@ -49,3 +49,62 @@ function showcontent(id) {
     contentToShow.style.display = "none";
   }
 }
+
+var counter = 0;
+var counterFunc = (function(){
+  var counter=10;
+  function add(){
+    return counter++
+  }
+  return add;
+})()
+
+// ---------------Call
+function greet() {
+  console.log('Hello, ' + this.name + '!');
+}
+
+var person1 = { name: 'Alice' };
+var person2 = { name: 'Bob' };
+
+greet.call(person1);
+greet.call(person2); 
+
+//-------------------------Apply
+function displayInfo(message) {
+  console.log(this.name + ' is ' + this.age + message);
+}
+
+var personInfo = { name: 'Charlie', age: 30 };
+displayInfo.apply(personInfo, [' years old']); 
+
+// ---------------BIND
+var person = {
+  name: 'John',
+};
+
+ function greet() {
+    console.log('Hello, ' + this.name + '!');
+}
+
+var greetJohn = greet.bind(person);
+
+greetJohn(); 
+
+var anotherPerson = { name: 'Alice' };
+person = anotherPerson;
+console.log(person)
+var greetOther = greet.bind(person)
+greetJohn();
+greetOther();
+
+
+//---------------- THIS applied with Bind
+function handleClick(button) {
+  console.log('Button clicked:', button.id);
+}
+
+function buttonClick(button) {
+  var boundFunction = handleClick.bind(null, button);
+  boundFunction();
+}
