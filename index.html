@@ -518,11 +518,54 @@
     </pre>
 		<button id="myButton1" onclick="buttonClick(this)">Click me 1</button>
     <button id="myButton2" onclick="buttonClick(this)">Click me 2</button>
-	
-	</div>
+
+	<h2>Coerción</h2>
+	<p>La coerción en JavaScript se refiere a la conversión automática de tipos de datos durante la evaluación de expresiones.</p>
+	<pre>
+		<code>
+		// Ejemplo de coerción implícita
+		let resultado = 5 + '10';  // resultado será '510'
+
+		// Ejemplo de coerción explícita
+		let numero = Number('42');  // número será 42
+		</code>
+	</pre>
+
+	<h2>Hoisting</h2>
+	<p>El hoisting es un comportamiento en JavaScript donde las declaraciones de variables y funciones son movidas al inicio de su ámbito durante la fase de compilación.</p>
+	<pre>
+		<code>
+		// Ejemplo de hoisting con variables
+		console.log(nombre);  // undefined
+		var nombre = 'Juan';
+
+		// Ejemplo de hoisting con funciones
+		saludar();  // 'Hola'
+		function saludar() {
+		console.log('Hola');
+		}
+		</code>
+	</pre>
+	<h2>Destructuring</h2>
+	<p>La destructuración es una característica que permite desempacar valores de arreglos o propiedades de objetos de manera concisa.</p>
+	<pre>
+		<code>
+		// Destructuración de arreglos
+		const numeros = [1, 2, 3];
+		const [a, b, c] = numeros;
+		console.log(a, b, c);  // 1, 2, 3
+
+		// Destructuración de objetos
+		const persona = { nombre: 'Ana', edad: 25 };
+		const { nombre, edad } = persona;
+		console.log(nombre, edad);  // Ana, 25
+		</code>
+	</pre>
+
 
 
 	<script src="index.js"></script>
+	<script src="hoist.js"></script>
 </body>
 
 </html>

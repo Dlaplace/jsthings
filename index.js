@@ -105,6 +105,41 @@ function handleClick(button) {
 }
 
 function buttonClick(button) {
+  console.log("this",this);
+  console.log("button",button);
+  
   var boundFunction = handleClick.bind(null, button);
   boundFunction();
 }
+
+//------ spread operator
+
+const arr = ["pizza","hamburguesa","papas","Perro","crispetas"];
+
+const [pizza, ...comida] = arr;
+console.log(pizza);
+const [,,papas] = arr;
+console.log("console de comida: ",comida);
+console.log("console de papas: ", papas);
+
+const persona = {
+  nombre: "test",
+  apellido: "tester",
+  ubicacion: {
+    pais: "colombia",
+    ciudad: "bogotá"
+  }
+}
+console.log(persona)
+
+const {nombre} = persona
+console.log("nombre",nombre);
+
+const { apellido: lastname} = persona;
+console.log("apellido", lastname);
+
+const personaCopy = {... persona}
+console.log("copia",personaCopy);
+
+persona.ubicacion.pais = "medellin";
+console.log("copia",personaCopy);
