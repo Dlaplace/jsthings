@@ -143,3 +143,36 @@ console.log("copia",personaCopy);
 
 persona.ubicacion.pais = "medellin";
 console.log("copia",personaCopy);
+
+
+document.getElementById('eventLoopBtn').addEventListener('click', function() {
+  console.log('1');
+  setTimeout(() => {
+      console.log('2');
+  }, 2000);
+  console.log('3');
+});
+
+document.getElementById('shallowCopyBtn').addEventListener('click', function() {
+  let objetoOriginal = { nombre: 'Juan', detalles: { edad: 30 } };
+  let copiaSuperficial = Object.assign({}, objetoOriginal);
+
+  copiaSuperficial.nombre = 'Ana';
+  copiaSuperficial.detalles.edad = 25;
+
+  console.log('Objeto Original:', objetoOriginal);
+  console.log('Copia Superficial:', copiaSuperficial);
+});
+
+document.getElementById('deepCopyBtn').addEventListener('click', function() {
+  let objetoOriginal = { nombre: 'Juan', detalles: { edad: 30 } };
+  let copiaProfunda = JSON.parse(JSON.stringify(objetoOriginal));
+
+  copiaProfunda.nombre = 'Pedro';
+  copiaProfunda.detalles.edad = 40;
+
+  console.log('Objeto Original:', objetoOriginal);
+  console.log('Copia Profunda:', copiaProfunda);
+});
+
+queueMicrotask

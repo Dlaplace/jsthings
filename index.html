@@ -562,6 +562,57 @@
 		</code>
 	</pre>
 
+	<button type="button" onclick="showcontent('objects & event loop')">show example</button>
+	<div id="objects & event loop">
+
+		<h2>Object copy</h2>
+		<p>El bucle de eventos (event loop) en JavaScript es un proceso 
+			que permite a JavaScript realizar operaciones no bloqueantes, 
+			a pesar de ser un lenguaje de un solo hilo. Esto significa que 
+			puede manejar eventos concurrentes y callbacks de manera eficiente. 
+			El event loop trabaja constantemente revisando si hay tareas en la cola de eventos 
+			y las ejecuta de acuerdo al orden en que fueron encoladas.</p>
+		<pre>
+			<code>
+				// Ejemplo de bucle de eventos con setTimeout
+				console.log('Inicio');  // Se ejecuta primero
+				setTimeout(function() {
+					console.log('Esto se ejecuta después de 2 segundos');
+				}, 2000);
+				console.log('Fin');  // Se ejecuta antes que el setTimeout
+			</code>
+		</pre>
+		<button id="eventLoopBtn"> Event Loop</button>
+		<h2>Object Copy</h2>
+		<p>La copia de objetos en JavaScript se refiere a la creación de una nueva 
+			nstancia de un objeto que tiene el mismo contenido que el objeto original. 
+			Existen diferentes maneras de copiar un objeto, 
+			dependiendo de si deseas una copia superficial (shallow copy) o una copia profunda (deep copy).
+
+			Una copia superficial copia las propiedades del objeto al nivel más alto. 
+			Si el objeto contiene referencias a otros objetos, estas referencias son compartidas 
+			entre el original y la copia, lo que significa que si modificas un objeto referenciado 
+			a través de la copia, también se modificará en el objeto original.</p>
+		<pre>
+			<code>
+				// Ejemplo de copia superficial de objeto con spread operator
+				let objetoOriginal = { nombre: 'Juan', detalles: { edad: 30 } };
+				let copiaSuperficial = { ...objetoOriginal };
+				console.log(copiaSuperficial);  // { nombre: 'Juan', detalles: { edad: 30 } }
+			</code>
+		</pre>
+		<button id="shallowCopyBtn">Ejecutar ejemplo de Copia Superficial</button>
+		<button id="deepCopyBtn">Ejecutar ejemplo de Copia Profunda</button>
+
+		<p>una forma alternativa de crear y copiar objetos es a travez de la funcion stringify y parse de JSON</p>
+		<br>
+		<p>otra alternativa es a través de el uso de la funcion global (de browser) structureClone. Esta transfieres los valores
+			dejando innacesible el objeto original Evitando algun cambio posterior. Sin embargo contiene algunas limitaciones.
+		</p>
+		
+
+	</div>
+
 
 
 	<script src="index.js"></script>
