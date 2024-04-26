@@ -175,4 +175,19 @@ document.getElementById('deepCopyBtn').addEventListener('click', function() {
   console.log('Copia Profunda:', copiaProfunda);
 });
 
-queueMicrotask
+
+document.getElementById('anotherMicrotask').addEventListener('click', function() {
+  Promise.resolve().then(()=>{
+    console.log("1")
+  });
+  
+  setTimeout(()=> console.log("2"), 200);
+  
+  queueMicrotask(()=>{
+    console.log("3");
+    queueMicrotask(console.log("4"));
+  });
+  
+  console.log("5")
+});
+
