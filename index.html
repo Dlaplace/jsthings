@@ -561,11 +561,12 @@
 		console.log(nombre, edad);  // Ana, 25
 		</code>
 	</pre>
-
+	</div>
+	
+	<h2>Event Loop</h2>
 	<button type="button" onclick="showcontent('objects & event loop')">show example</button>
 	<div id="objects & event loop">
 
-		<h2>Object copy</h2>
 		<p>El bucle de eventos (event loop) en JavaScript es un proceso 
 			que permite a JavaScript realizar operaciones no bloqueantes, 
 			a pesar de ser un lenguaje de un solo hilo. Esto significa que 
@@ -613,6 +614,73 @@
 		
 
 	</div>
+
+	<h2>Events</h2>
+	<button type="button" onclick="showcontent('events')">show example</button>
+
+		<div id="events">
+      <h2>Event Handling</h2>
+			<p> Los eventos son señales lanzadas desde el navegador para notificar cambios en el navegador.
+        Event Handling en JavaScript se refiere a cómo gestionar eventos como clics, envíos de formularios, etc. 
+        Un event handler es una función que se ejecuta en respuesta a un evento.
+      
+        Existen dos formas recomendadas para usar event handler. Una es asignando al objetivo el evento <b>onevent</b> o 
+        asignandole por referencia de el elemento el handler listener especifico con <b>addEventListener()</b> 
+      </p>
+			<pre>
+				<code>
+					// Ejemplo de Event Handling
+					document.getElementById('eventHandlerBtn').addEventListener('click', function() {
+						alert('Button clicked!');
+					});
+				</code>
+			</pre>
+			<button id="eventHandlerBtn">hover me</button>
+
+			<h2>Event Delegation</h2>
+			<p>Event Delegation es una técnica en JavaScript que nos permite gestionar eventos de manera más eficiente. En lugar de añadir event listeners a múltiples elementos hijos, se añade un solo event listener al elemento padre. Este event listener puede capturar eventos de los elementos hijos gracias a la propagación del evento.</p>
+			<pre>
+				<code>
+					// Ejemplo de Event Delegation
+					document.getElementById('parent').addEventListener('click', function(event) {
+						if (event.target && event.target.matches('button.child')) {
+							console.log('Button clicked:', event.target.textContent);
+						}
+					});
+				</code>
+			</pre>
+			<div id="parent">
+				<button class="child">Child 1</button>
+				<button class="child">Child 2</button>
+			</div>
+	
+			
+	
+			<h2>Bubbling</h2>
+			<p>Event Bubbling es un concepto en el que un evento primero se captura y se maneja por el elemento más profundo en el DOM, y luego se propaga hacia arriba a través de los ancestros. Esto permite que los ancestros gestionen eventos de sus descendientes.</p>
+			<pre>
+				<code>
+					// Ejemplo de Event Bubbling
+					document.getElementById('outer').addEventListener('click', function() {
+						console.log('Outer Div Clicked');
+					});
+					
+					document.getElementById('inner').addEventListener('click', function(event) {
+						console.log('Inner Div Clicked');
+						// event.stopPropagation(); // Descomentar para detener el bubbling
+					});
+				</code>
+			</pre>
+			<div id="outer" style="padding: 20px; background-color: lightblue;">
+				Outer Div
+				<div id="inner" style="padding: 20px; background-color: lightcoral;">
+					Inner Div
+				</div>
+			</div>
+      <p>Para evitar el comportamiento del bubbling se usa function event.stopPropagation() para evitar la propagacion en el dom</p>
+	
+		</div>
+
 
 
 

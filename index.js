@@ -191,3 +191,26 @@ document.getElementById('anotherMicrotask').addEventListener('click', function()
   console.log("5")
 });
 
+
+
+// Event Handling
+document.getElementById('eventHandlerBtn').addEventListener('mouseover', function() {
+    alert('Button hover!');
+});
+// Event Delegation
+document.getElementById('parent').addEventListener('click', function(event) {
+    if (event.target && event.target.matches('button.child')) {
+        console.log('Button clicked:', event.target.textContent);
+    }
+});
+
+
+// Event Bubbling
+document.getElementById('outer').addEventListener('click', function() {
+    console.log('Outer Div Clicked');
+});
+
+document.getElementById('inner').addEventListener('click', function(event) {
+    console.log('Inner Div Clicked');
+    // event.stopPropagation(); // Uncomment to stop the bubbling
+});
