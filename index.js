@@ -194,6 +194,8 @@ document.getElementById('anotherMicrotask').addEventListener('click', function()
 
 
 // Event Handling
+
+
 document.getElementById('eventHandlerBtn').addEventListener('mouseover', function() {
     alert('Button hover!');
 });
@@ -212,5 +214,25 @@ document.getElementById('outer').addEventListener('click', function() {
 
 document.getElementById('inner').addEventListener('click', function(event) {
     console.log('Inner Div Clicked');
-    // event.stopPropagation(); // Uncomment to stop the bubbling
+    event.stopPropagation(); // Uncomment to stop the bubbling
 });
+
+// Accessing the document object
+// Manipulating the DOM through the document object
+document.getElementById('changeColor').addEventListener('click', function() {
+  console.log(document);
+    document.body.style.backgroundColor = 'lightblue';
+});
+
+
+// Create a new element
+const newElement = document.createElement('p');
+newElement.textContent = 'This is a new paragraph created dynamically.';
+
+// Append the new element to the body
+document.getElementById('addElement').addEventListener('click', function() {
+    document.body.appendChild(newElement);
+});
+
+// Change the content of an existing element
+document.getElementById('changeText').textContent = 'Text has been changed!';

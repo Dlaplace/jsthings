@@ -681,6 +681,38 @@
 	
 		</div>
 
+	<h2>DOM vs Document</h2>
+	<p>El documento es un objedo que existe como entrada al contendio de la pagina mientas el dom representa la estructura del documento como un arbol de nodos</p>
+	<pre>
+			<code>
+					// para observar el documento
+					console.log(document);
+
+					// Manipulating the DOM through the document object
+					document.body.style.backgroundColor = 'lightyellow';
+			</code>
+	</pre>
+	<button id="changeColor">Change Background Color</button>
+
+	<h2>DOM Manipulation</h2>
+	<p>La manipulacion implica cambiar la estructura contenido o estilo</p>
+	<pre>
+			<code>
+					// crea elemento con createElement
+					const newElement = document.createElement('p');
+					newElement.textContent = 'This is a new paragraph created dynamically.';
+
+					// agrega elemento al cuerpo 
+					document.body.appendChild(newElement);
+
+					// cambia el contenido del elemento
+					document.getElementById('changeText').textContent = 'Text has been changed!';
+			</code>
+	</pre>
+	<button id="addElement">Add Paragraph</button>
+	<p id="changeText">Original Text</p>
+
+
 
 
 
